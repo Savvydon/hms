@@ -55,9 +55,12 @@ app = FastAPI(
     description="Hospital management system backend with authentication and role-based administration.",
 )
 
+raw_origins = settings.FRONTEND_URL or ""
+allowed_origins = [url.strip().rstrip("/") for url in raw_origins.split(",") if url]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.FRONTEND_URL],
+    allow_origins=allowed_origins,  # Passed the newly cleaned list here
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
