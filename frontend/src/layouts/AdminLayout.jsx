@@ -9,6 +9,7 @@ import {
   FaSignOutAlt,
   FaUserMd,
   FaUsers,
+  FaChartLine,
   FaUserShield,
 } from "react-icons/fa";
 import { useAuth } from "../contexts/AuthContext";
@@ -22,6 +23,8 @@ const navItems = [
   { path: "/admin/billing", label: "Billing", icon: <FaMoneyBill /> },
   { path: "/admin/pharmacy", label: "Pharmacy", icon: <FaPills /> },
   { path: "/admin/laboratory", label: "Laboratory", icon: <FaFlask /> },
+  { path: "/admin/reports", label: "Reports", icon: <FaChartLine /> },
+  { path: "/admin/audit", label: "Audit Logs", icon: <FaChartLine /> },
 ];
 
 export default function AdminLayout() {

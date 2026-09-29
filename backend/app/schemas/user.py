@@ -16,7 +16,7 @@ class UserBase(BaseModel):
 
 
 class UserCreate(UserBase):
-    password: str = Field(..., min_length=8)
+    password: str = Field(..., min_length=8, max_length=72)
 
 
 class PublicRegistration(BaseModel):
@@ -24,7 +24,7 @@ class PublicRegistration(BaseModel):
     last_name: str = Field(..., min_length=1, max_length=100)
     email: EmailStr
     username: str = Field(..., min_length=3, max_length=50)
-    password: str = Field(..., min_length=8)
+    password: str = Field(..., min_length=8, max_length=72)
     phone: Optional[str] = Field(default=None, max_length=20)
     gender: Optional[str] = Field(default=None, max_length=20)
     blood_group: Optional[str] = Field(default=None, max_length=5)

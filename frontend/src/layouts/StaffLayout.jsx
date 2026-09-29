@@ -9,6 +9,7 @@ import {
   FaSignOutAlt,
   FaUserMd,
   FaUsers,
+  FaNotesMedical,
 } from "react-icons/fa";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -29,12 +30,14 @@ const roleNavigation = {
     ["/staff/doctors", "Doctors", FaUserMd],
     ["/staff/pharmacy", "Pharmacy", FaPills],
     ["/staff/laboratory", "Laboratory", FaFlask],
+    ["/staff/clinical", "Clinical Care", FaNotesMedical],
   ],
   nurse: [
     ["/staff/dashboard", "Dashboard", FaChartBar],
     ["/staff/patients", "Patients", FaUsers],
     ["/staff/appointments", "Appointments", FaCalendarCheck],
     ["/staff/doctors", "Doctors", FaUserMd],
+    ["/staff/clinical", "Clinical Care", FaNotesMedical],
   ],
   receptionist: [
     ["/staff/dashboard", "Dashboard", FaChartBar],

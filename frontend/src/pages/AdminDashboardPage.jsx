@@ -30,6 +30,7 @@ export default function AdminDashboardPage() {
     ["Appointments", stats.appointments, <FaCalendarCheck />, "warning"],
     ["Medicines", stats.medicines, <FaPills />, "secondary"],
     ["Laboratory Tests", stats.laboratory_tests, <FaFlask />, "danger"],
+    ["Clinical Encounters", stats.clinical_encounters, <FaUserMd />, "info"],
     ["Bills", stats.bills, <FaMoneyBillWave />, "dark"],
   ];
 

@@ -1,0 +1,2 @@
+import { Card,Col,Row } from "react-bootstrap";
+export default function AdminStats({stats}){const cards=[["Users",stats?.users],["Patients",stats?.patients],["Doctors",stats?.doctors],["Appointments",stats?.appointments],["Bills",stats?.bills],["Revenue",`₦${Number(stats?.revenue||0).toLocaleString()}`]];return <Row className="g-3 mb-4">{cards.map(([label,value])=><Col sm={6} lg={2} key={label}><Card className="border-0 shadow-sm h-100"><Card.Body><small className="text-muted">{label}</small><h4 className="fw-bold mb-0">{value??0}</h4></Card.Body></Card></Col>)}</Row>;}

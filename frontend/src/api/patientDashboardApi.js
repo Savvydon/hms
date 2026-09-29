@@ -1,0 +1,2 @@
+import api from "./axios";
+export const getPatientPortalData=async()=>{const [patients,appointments,prescriptions,laboratory,billing]=await Promise.all([api.get("/patients/"),api.get("/appointments/"),api.get("/pharmacy/prescriptions"),api.get("/laboratory/tests"),api.get("/billing/")]);return {patient:patients.data?.[0]||null,appointments:appointments.data||[],prescriptions:prescriptions.data||[],tests:laboratory.data||[],bills:billing.data||[]};};

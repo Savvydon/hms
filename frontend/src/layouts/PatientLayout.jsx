@@ -2,6 +2,8 @@ import { Badge, Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   FaCalendarCheck,
+  FaNotesMedical,
+  FaBell,
   FaFileInvoiceDollar,
   FaFlask,
   FaHome,
@@ -16,6 +18,8 @@ const navItems = [
   ["/patient/dashboard", "My Dashboard", FaHome],
   ["/patient/profile", "My Profile", FaUser],
   ["/patient/appointments", "My Appointments", FaCalendarCheck],
+  ["/patient/clinical", "My Clinical Record", FaNotesMedical],
+  ["/patient/notifications", "Notifications", FaBell],
   ["/patient/prescriptions", "My Prescriptions", FaPills],
   ["/patient/laboratory", "My Laboratory Results", FaFlask],
   ["/patient/billing", "My Bills", FaFileInvoiceDollar],

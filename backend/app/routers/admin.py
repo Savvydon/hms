@@ -12,6 +12,8 @@ from app.models.patient import Patient
 from app.models.user import User
 from app.models.pharmacy import Medicine, Prescription
 from app.models.laboratory import LabTest
+from app.models.audit import AuditLog
+from app.models.clinical import ClinicalEncounter
 from app.schemas.user import AdminUserCreate, UserResponse, UserUpdate
 
 router = APIRouter(prefix="/admin", tags=["Administration"])
@@ -30,6 +32,7 @@ def get_stats(
         "medicines": db.query(Medicine).count(),
         "prescriptions": db.query(Prescription).count(),
         "laboratory_tests": db.query(LabTest).count(),
+        "clinical_encounters": db.query(ClinicalEncounter).count(),
         "bills": db.query(Bill).count(),
         "revenue": float(db.query(func.coalesce(func.sum(Bill.paid_amount), 0)).scalar() or 0),
     }
@@ -115,3 +118,19 @@ def reset_password(
     user.password = hash_password(password)
     db.commit()
     return {"message": "Password updated successfully"}
+
+
+@router.get("/audit-logs")
+def get_audit_logs(limit: int = 100, db: Session = Depends(get_db), current_user: User = Depends(require_role("admin"))):
+    limit = max(1, min(limit, 500))
+    logs = db.query(AuditLog).order_by(AuditLog.created_at.desc()).limit(limit).all()
+    result = []
+    for log in logs:
+        actor = db.query(User).filter(User.id == log.user_id).first() if log.user_id else None
+        result.append({
+            "id": log.id, "user_id": log.user_id,
+            "user_name": f"{actor.first_name} {actor.last_name}" if actor else "System",
+            "action": log.action, "entity_type": log.entity_type, "entity_id": log.entity_id,
+            "details": log.details, "created_at": log.created_at,
+        })
+    return result

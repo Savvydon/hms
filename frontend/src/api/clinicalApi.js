@@ -1,0 +1,12 @@
+import api from "./axios";
+export const getEncounters=()=>api.get("/clinical/records").then(r=>r.data);
+export const createEncounter=(payload)=>api.post("/clinical/records",payload).then(r=>r.data);
+export const updateEncounter=(id,payload)=>api.patch(`/clinical/records/${id}`,payload).then(r=>r.data);
+export const createVitals=(payload)=>api.post("/clinical/vitals",payload).then(r=>r.data);
+export const getVitals=(patientId)=>api.get(`/clinical/vitals/${patientId}`).then(r=>r.data);
+export const createDiagnosis=(payload)=>api.post("/clinical/diagnoses",payload).then(r=>r.data);
+export const getDiagnoses=(patientId)=>api.get(`/clinical/diagnoses/${patientId}`).then(r=>r.data);
+export const createAllergy=(payload)=>api.post("/clinical/allergies",payload).then(r=>r.data);
+export const getAllergies=(patientId)=>api.get(`/clinical/allergies/${patientId}`).then(r=>r.data);
+export const createCondition=(payload)=>api.post("/clinical/conditions",payload).then(r=>r.data);
+export const getConditions=(patientId)=>api.get(`/clinical/conditions/${patientId}`).then(r=>r.data);

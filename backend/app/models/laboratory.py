@@ -11,6 +11,13 @@ class LabTest(Base):
     test_name = Column(String(200), nullable=False)
     test_type = Column(String(100))
     result = Column(Text)
+    reference_range = Column(String(200))
+    result_units = Column(String(100))
+    specimen_received_at = Column(DateTime(timezone=True))
+    validated_at = Column(DateTime(timezone=True))
+    released_at = Column(DateTime(timezone=True))
+    performed_by_id = Column(Integer, ForeignKey("users.id", ondelete="SET NULL"))
+    validated_by_id = Column(Integer, ForeignKey("users.id", ondelete="SET NULL"))
     status = Column(String(20), default="pending")  # pending, in_progress, completed
     ordered_date = Column(DateTime(timezone=True), server_default=func.now())
     completed_date = Column(DateTime(timezone=True))

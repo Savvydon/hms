@@ -1,0 +1,4 @@
+import { Form,Row,Col } from "react-bootstrap";
+const roles=["admin","doctor","nurse","receptionist","pharmacist","laboratory","accountant","patient"];
+const fields=[["first_name","First name","text"],["last_name","Last name","text"],["email","Email","email"],["username","Username","text"],["password","Password","password"],["phone","Phone","text"]];
+export default function UserForm({value,onChange}){return <Row className="g-3">{fields.map(([n,l,t])=><Col md={6} key={n}><Form.Group><Form.Label>{l}</Form.Label><Form.Control name={n} type={t} value={value[n]} onChange={onChange} minLength={n==="password"?8:undefined} required={n!=="phone"}/></Form.Group></Col>)}<Col md={6}><Form.Group><Form.Label>Role</Form.Label><Form.Select name="role" value={value.role} onChange={onChange}>{roles.map(r=><option key={r} value={r}>{r}</option>)}</Form.Select></Form.Group></Col></Row>;}

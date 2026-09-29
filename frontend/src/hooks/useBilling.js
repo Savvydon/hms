@@ -1,0 +1,4 @@
+import { useCallback,useEffect,useState } from "react";
+import { getBills,getBillingStats,createBill,recordPayment } from "../api/billingApi";
+import { getPatients } from "../api/patientApi";
+export default function useBilling(){const [bills,setBills]=useState([]),[patients,setPatients]=useState([]),[stats,setStats]=useState({}),[loading,setLoading]=useState(true),[error,setError]=useState("");const refresh=useCallback(async()=>{setLoading(true);setError("");try{const [b,p,s]=await Promise.all([getBills(),getPatients(),getBillingStats().catch(()=>({}))]);setBills(b);setPatients(p);setStats(s);}catch(e){setError(e.response?.data?.detail||"Failed to load billing data");}finally{setLoading(false);}},[]);useEffect(()=>{refresh();},[refresh]);const create=async p=>{await createBill(p);await refresh();};const pay=async(id,p)=>{await recordPayment(id,p);await refresh();};return {bills,patients,stats,loading,error,setError,refresh,create,pay};}

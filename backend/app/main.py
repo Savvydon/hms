@@ -5,7 +5,8 @@ from app.core.config import get_settings
 from app.core.database import Base, engine
 from app.models.user import User
 from app.core.security import hash_password
-from app.routers import auth, appointments, billing, doctors, patients, pharmacy, laboratory, admin
+from app.routers import auth, appointments, billing, doctors, patients, pharmacy, laboratory, admin, clinical, notifications, reports
+from app import models  # noqa: F401 - registers all SQLAlchemy models
 
 settings = get_settings()
 
@@ -66,6 +67,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.middleware("http")
+async def security_headers(request, call_next):
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    return response
+
 app.include_router(auth.router)
 app.include_router(admin.router)
 app.include_router(appointments.router)
@@ -74,6 +83,9 @@ app.include_router(doctors.router)
 app.include_router(patients.router)
 app.include_router(pharmacy.router)
 app.include_router(laboratory.router)
+app.include_router(clinical.router)
+app.include_router(notifications.router)
+app.include_router(reports.router)
 
 
 @app.get("/")

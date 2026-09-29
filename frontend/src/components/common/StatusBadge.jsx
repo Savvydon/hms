@@ -1,0 +1,3 @@
+import { Badge } from "react-bootstrap";
+const variants={pending:"warning",booked:"warning",confirmed:"primary",checked_in:"info",waiting:"info",in_consultation:"primary",completed:"success",paid:"success",partially_paid:"warning",cancelled:"danger",requested:"warning",specimen_received:"info",processing:"primary",result_entered:"secondary",validated:"success",released:"success",active:"success",dispensed:"secondary"};
+export default function StatusBadge({ status }) { const key=String(status||"unknown").toLowerCase(); return <Badge bg={variants[key]||"secondary"}>{String(status||"Unknown").replaceAll("_"," ")}</Badge>; }

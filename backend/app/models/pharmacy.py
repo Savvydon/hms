@@ -26,4 +26,8 @@ class Prescription(Base):
     frequency = Column(String(100))
     duration = Column(String(100))
     status = Column(String(20), default="active")
+    quantity = Column(Integer, default=1)
+    instructions = Column(String(500))
+    dispensed_at = Column(DateTime(timezone=True))
+    dispensed_by_id = Column(Integer, ForeignKey("users.id", ondelete="SET NULL"))
     created_at = Column(DateTime(timezone=True), server_default=func.now())
